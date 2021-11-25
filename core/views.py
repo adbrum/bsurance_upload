@@ -22,4 +22,11 @@ def show_images(request, image_name):
     except Image.DoesNotExist:
         context = {'image_file': None}
 
-    return render(request, 'core/show_images.html', context)
+    return render(request, 'core/core/404.html', context)
+
+
+def handler404(request, exception):
+    context = {}
+    response = render(request, "core/404.html", context=context)
+    response.status_code = 404
+    return response

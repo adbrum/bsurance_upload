@@ -13,9 +13,9 @@ def upload_image(request):
     return render(request, 'core/upload_images.html', {'form': form})
 
 
-def show_images(request):
+def show_images(request, image_name):
     try:
-        images = Image.objects.get(pk=1)
+        images = Image.objects.get(name=image_name)
         image_file = images.image_file.url
         context = {'image_file': image_file}
         return render(request, 'core/show_images.html', context)

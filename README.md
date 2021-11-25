@@ -104,7 +104,7 @@ $ python manage.py runserver --insecure
 
 4. Imagine we want to count how many people see a picture without using an external service e.g Google Analytics. Explain how would you do this. Take into account two scenarios, first a low traffic scenario and then a high traffic scenario.
     ### Answer:
-    - Low traffic - An access counter in the patina where the images are.
+    - Low traffic - An access counter on the page where the images are.
     ````
     def index(request):
         ...

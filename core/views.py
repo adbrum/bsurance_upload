@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.forms import ImageForm
+from core.models import Image
 
 
 def upload_image(request):
@@ -10,3 +11,15 @@ def upload_image(request):
     else:
         form = ImageForm()
     return render(request, 'core/upload_images.html', {'form': form})
+
+
+def show_images(request):
+    try:
+        images = Image.objects.get(pk=1)
+        image_file = images.image_file.url
+        context = {'image_file': image_file}
+        return render(request, 'core/show_images.html', context)
+    except Image.DoesNotExist:
+        context = {'image_file': None}
+
+    return render(request, 'core/show_images.html', context)

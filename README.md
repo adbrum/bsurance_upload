@@ -7,7 +7,6 @@ First clone the repository from Github and switch to the new directory:
 $ git https://github.com/adbrum/bsurance_upload.git
 $ cd bsurance_upload
 ````
-
 #### Activate the virtualenv for your project.
   
 Install project dependencies:
@@ -29,6 +28,7 @@ You can now run the development server:
 ```
 $ python manage.py runserver --insecure
 ```
+
 
 - Use the **--insecure** option to force static files to be displayed with the staticfiles application, even if the DEBUG setting is False. This is for local development only, should never be used in production, and is only available if the staticfiles application is in your project's INSTALLED_APPS setting.
 

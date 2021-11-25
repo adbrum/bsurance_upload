@@ -7,9 +7,21 @@ def upload_image(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-    else:
-        form = ImageForm()
+            image = form.save(commit=False)
+            try:
+                data = Image.objects.get(name=image.name)
+                Image.objects.filter(pk=data.pk).delete()
+                image.save()
+                url = image.image_file.url
+            except Image.DoesNotExist:
+                image.save()
+                url = image.image_file.url
+            context = {'image_file': url,  'form': form}
+
+            return render(request, 'core/upload_images.html', context)
+
+    form = ImageForm()
+
     return render(request, 'core/upload_images.html', {'form': form})
 
 

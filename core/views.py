@@ -1,7 +1,12 @@
 from django.shortcuts import render
+from core.forms import ImageForm
 
-# Create your views here.
 
-
-def index(request):
-    return render(request, 'core/show_images.html')
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ImageForm()
+    return render(request, 'core/upload_images.html', {'form': form})

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from core.forms import ImageForm
 from core.models import Image
+from django.contrib import messages
 
 
 def upload_image(request):
@@ -13,12 +14,18 @@ def upload_image(request):
                 Image.objects.filter(pk=data.pk).delete()
                 image.save()
                 url = image.image_file.url
+                messages.success(request, f'{image.name} image changed')
             except Image.DoesNotExist:
                 image.save()
                 url = image.image_file.url
+                messages.success(request, f'{image.name} image uploaded')
+
             context = {'image_file': url,  'form': form}
 
             return render(request, 'core/upload_images.html', context)
+
+        else:
+            messages.error(request, 'Image upload failed')
 
     form = ImageForm()
 
